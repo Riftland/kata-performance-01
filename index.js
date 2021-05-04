@@ -28,3 +28,28 @@ module.exports = (n, random) => {
     }
     return chosen;
 };
+
+// Less fancy, but also effective 😛
+
+module.exports = (n, random) => {
+    let result;
+    let found = false;
+    let min = 1n;
+    let max = n;
+    let mid;
+    let iterations = 0;
+  
+    do {
+      mid = (max - min) / 2n + min;
+      iterations++;
+      if (min <= random && random < mid) {
+        max = mid;
+      } else if (mid < random && random <= max) {
+        min = mid;
+      } else {
+        found = true;
+        result = mid;
+      }
+    } while (!found);
+    return result;
+  };
